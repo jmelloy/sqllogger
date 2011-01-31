@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Rev: 1080 $ $Date: 2005-05-29 14:38:48 -0500 (Sun, 29 May 2005) $ -->
+<?xml-stylesheet href="querylib.xsl" type="text/xml"?>
+
+<l:library xmlns:l="http://www.slamb.org/axamol/sql-library/library"
+           xmlns:s="http://www.slamb.org/axamol/sql-library/statement"
+           xmlns:d="http://www.slamb.org/documentation"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.slamb.org/axamol/sql-library/library
+                               http://www.slamb.org/projects/axamol/sql-library/schema/library.xsd">
+
+
+  <l:name>
+    Statistics
+  </l:name>
+
+  <l:version>
+    $Rev: 1080 $
+    $Date: 2005-05-29 14:38:48 -0500 (Sun, 29 May 2005) $
+  </l:version>
+
+  <l:description>
+    Queries for the Statistics portion of the SQL Logger.
+  </l:description>
+
+
+  <s:query name="yearly_monthly_totals_sender">
+    <l:description>
+      Gets total messages sent and received for each year and month
+      for a user.
+    </l:description>
+
+    <s:param name = "sender" type="integer" />
+
+    <s:sql databases="pgsql">
+      select    date_part('month', period) as month,
+                date_part('year', period) as year,
+                sum(num_messages) as count,
+                to_char(period, 'Mon, YYYY') as date,
+                period as full_date,
+                case when is_sender_bool
+                  then 1
+                  else 0 end as is_sender
+      from      (select *, sender_id = <s:bind param="sender" />
+                        as is_sender_bool
+                    from im.user_statistics) as ius
+      <s:ifNotNull param="sender">
+      where     sender_id = <s:bind param="sender" />
+        or      recipient_id = <s:bind param="sender" />
+      </s:ifNotNull>
+      group by  date_part('month', period),
+                date_part('year', period),
+                to_char(period, 'Mon, YYYY'),
+                period,
+                is_sender_bool
+      order by  full_date
+    </s:sql>
+  </s:query>
+
+  <s:query name="yearly_monthly_totals_meta">
+    <l:description>
+      Gets the monthly and yearly totals for a meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select    date_part('month', period) as month,
+                date_part('year', period) as year,
+                sum(num_messages) as count,
+                to_char(period, 'Mon, YYYY') as date,
+                period as full_date,
+                case when sender_id = user_id
+                  then 1
+                  else 0 end as is_sender
+      from      im.user_statistics, im.meta_contact
+      where     (sender_id = user_id
+        or      recipient_id = user_id)
+       and      meta_id = <s:bind param="meta_id" />
+      group by  date_part('month', period),
+                date_part('year', period),
+                to_char(period, 'Mon, YYYY'),
+                period,
+                sender_id = user_id
+      order by  full_date
+    </s:sql>
+  </s:query>
+
+  <s:query name="popular_messages_sender">
+    <l:description>
+      Gets the 20 most popular messages involving a user.
+    </l:description>
+
+    <s:param name="sender" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    message,
+                count(*),
+                to_char(max(message_date), 'Mon DD, YYYY HH24:MM') as max
+      from      im.messages
+      where     1 = 1
+      <s:ifNotNull param="sender">
+       and      sender_id = <s:bind param="sender" />
+      </s:ifNotNull>
+      <s:ifNotNull param="startDate">
+        and     message_date >= <s:bind param="startDate" />
+      </s:ifNotNull>
+      <s:ifNotNull param="endDate">
+        and     message_date &lt; <s:bind param="endDate" />
+      </s:ifNotNull>
+      group by  message
+      order by  count(*) desc
+      limit     20
+    </s:sql>
+  </s:query>
+
+  <s:query name="popular_messages_meta">
+    <l:description>
+      Shows most popular messages for a meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    message,
+                count(*),
+                to_char(max(message_date), 'Mon DD, YYYY HH24:MM') as max
+      from      im.messages,
+                im.meta_contact
+      where     sender_id = user_id
+        and     meta_id = <s:bind param="meta_id" />
+      <s:ifNotNull param="startDate">
+        and     message_date >= <s:bind param="startDate" />
+      </s:ifNotNull>
+      <s:ifNotNull param="endDate">
+        and     message_date &lt; <s:bind param="endDate" />
+      </s:ifNotNull>
+      group by  message
+      order by  count(*) desc
+      limit     20
+    </s:sql>
+  </s:query>
+
+  <s:query name="popular_users_sender">
+    <l:description>
+      Show most popular users.
+    </l:description>
+
+    <s:param name="sender" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    sent.sent,
+                received.received,
+                username,
+                (select      message
+                 from        im.messages
+                 where       sender_id = sent.user_id
+                   and       random_id > random()
+                 limit       1) as message
+      from      (select     sender_id as user_id,
+                            sum(num_messages) as sent
+                  from       im.user_statistics
+                  where     1 = 1
+                  <s:ifNotNull param="sender">
+                   and      (sender_id = <s:bind param="sender" />
+                             or recipient_id = <s:bind param="sender" />)
+                  </s:ifNotNull>
+                  <s:ifNotNull param="startDate">
+                   and      (period >= <s:bind param="startDate" />
+                              and period &lt; <s:bind param="endDate" />)
+                  </s:ifNotNull>
+                  group by   sender_id) as sent
+                  join users on (users.user_id = sent.user_id),
+                (select     recipient_id as user_id,
+                            sum(num_messages) as received
+                from        im.user_statistics
+                where       1 = 1
+                   <s:ifNotNull param="sender">
+                   and      (sender_id = <s:bind param="sender" />
+                             or recipient_id = <s:bind param="sender" />)
+                  </s:ifNotNull>
+                  <s:ifNotNull param="startDate">
+                   and      (period >= <s:bind param="startDate" />
+                              and period &lt; <s:bind param="endDate" />)
+                  </s:ifNotNull>
+                group by    recipient_id) as received
+      where     sent.user_id = received.user_id
+      order by    sent.sent + received.received desc, username
+      limit       20;
+    </s:sql>
+  </s:query>
+
+  <s:query name="popular_users_meta">
+    <l:description>
+      Show most popular users for a meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    sent.sent,
+                received.received,
+                username,
+                (select     message
+                 from       im.messages
+                 where      sender_id = sent.user_id
+                   and      random_id > random()
+                 limit      1) as message
+      from      (select     sender_id as user_id,
+                            sum(num_messages) as sent
+                  from       im.user_statistics, im.meta_contact
+                  where     meta_id = <s:bind param="meta_id" />
+                   and      (sender_id = user_id
+                             or recipient_id = user_id)
+                  <s:ifNotNull param="startDate">
+                   and      (period >= <s:bind param="startDate" />
+                              and period &lt; <s:bind param="endDate" />)
+                  </s:ifNotNull>
+                  group by   sender_id) as sent
+                  join users on (users.user_id = sent.user_id),
+                (select     recipient_id as user_id,
+                            sum(num_messages) as received
+                from        im.user_statistics, im.meta_contact
+                where       meta_id = <s:bind param="meta_id" />
+                 and        (sender_id = user_id
+                             or recipient_id = user_id)
+                  <s:ifNotNull param="startDate">
+                   and      (period >= <s:bind param="startDate" />
+                              and period &lt; <s:bind param="endDate" />)
+                  </s:ifNotNull>
+                group by    recipient_id) as received
+      where     sent.user_id = received.user_id
+      order by    sent.sent + received.received desc, username
+      limit       20
+    </s:sql>
+  </s:query>
+
+  <!-- DETAILS -->
+
+  <s:query name="date_info">
+    <l:description>
+      Selects first and last days of month.
+    </l:description>
+
+    <s:param name="startDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    date_part('day',
+                  <s:bind param="startDate" />::timestamp
+                  + '1 month'::interval
+                  - '1 day'::interval) as last_day,
+                <s:bind param="startDate" />::timestamp
+                  + '1 month'::interval as end_month,
+                to_char(<s:bind param="startDate" />::timestamp,
+                  'Mon, YYYY') as month
+    </s:sql>
+  </s:query>
+
+  <s:query name="total_messages_month">
+    <l:description>
+      Shows total messages sent and received for a particular month.
+    </l:description>
+
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    coalesce(count(*),0) as total_sent,
+                coalesce(min(length(message)),0) as min_length,
+                coalesce(max(length(message)),0) as max_length,
+                coalesce(trunc(avg(length(message)), 2),0) as avg_length,
+                'Sent and Received' as identifier
+      from      im.messages
+      where     message_date >= <s:bind param="startDate" />::timestamp
+        and     message_date &lt; <s:bind param="endDate" />::timestamp
+    </s:sql>
+  </s:query>
+
+  <s:query name="total_messages_month_user">
+    <l:description>
+      Returns total messages sent and received and averages
+        for a month for a user.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    coalesce(count(*),0) as total_sent,
+                coalesce(min(length(message)),0) as min_length,
+                coalesce(max(length(message)),0) as max_length,
+                coalesce(trunc(avg(length(message)),2),0) as avg_length,
+                'Sent' as identifier
+      from      im.messages
+      where     sender_id = <s:bind param="user_id" />
+        and     message_date >= <s:bind param="startDate" />::timestamp
+        and     message_date &lt; <s:bind param="endDate" />::timestamp
+      group by  sender_id
+      union all
+      select    coalesce(count(*),0) as total_sent,
+                coalesce(min(length(message)),0) as min_length,
+                coalesce(max(length(message)),0) as max_length,
+                coalesce(trunc(avg(length(message)), 2),0) as avg_length,
+                'Received' as identifier
+      from      im.messages
+      where     recipient_id = <s:bind param="user_id" />
+        and     message_date >= <s:bind param="startDate" />::timestamp
+        and     message_date &lt; <s:bind param="endDate" />::timestamp
+      group by  recipient_id
+    </s:sql>
+  </s:query>
+
+  <s:query name="total_messages_month_meta">
+    <l:description>
+      Returns total messages and average length for a month for a meta.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    coalesce(count(*),0) as total_sent,
+                coalesce(min(length(message)),0) as min_length,
+                coalesce(max(length(message)),0) as max_length,
+                coalesce(trunc(avg(length(message)),2),0) as avg_length,
+                'Sent' as identifier
+      from      im.messages,
+                im.meta_contact
+      where     sender_id = user_id
+        and     meta_id = <s:bind param="meta_id" />
+        and     message_date >= <s:bind param="startDate" />::timestamp
+        and     message_date &lt; <s:bind param="endDate" />::timestamp
+      union all
+      select    coalesce(count(*),0) as total_sent,
+                coalesce(min(length(message)),0) as min_length,
+                coalesce(max(length(message)),0) as max_length,
+                coalesce(trunc(avg(length(message)), 2),0) as avg_length,
+                'Received' as identifier
+      from      im.messages,
+                im.meta_contact
+      where     recipient_id = user_id
+        and     meta_id = <s:bind param="meta_id" />
+        and     message_date >= <s:bind param="startDate" />::timestamp
+        and     message_date &lt; <s:bind param="endDate" />::timestamp
+    </s:sql>
+  </s:query>
+
+  <s:query name="daily_totals_user">
+    <l:description>
+      Gets total messages sent/received per day for a user for a month.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    date_part('day', message_date) as day,
+                count(*) as count
+      from      im.messages
+      where     message_date >= <s:bind param="startDate" />::timestamp
+       and      message_date &lt;= <s:bind param="endDate" />::timestamp
+       <s:ifNotNull param="user_id">
+       and      (sender_id = <s:bind param="user_id" />
+       or recipient_id = <s:bind param="user_id" />)
+       </s:ifNotNull>
+      group by  date_part('day', message_date)
+    </s:sql>
+  </s:query>
+
+  <s:query name="daily_totals_meta">
+    <l:description>
+      Shows total messages per day for a meta contact for a range.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    date_part('day', message_date) as day,
+                count(*) as count
+      from      im.messages,
+                meta_contact
+      where     message_date >= <s:bind param="startDate" />::timestamp
+       and      message_date &lt;= <s:bind param="endDate" />::timestamp
+       and      (sender_id = user_id
+                or recipient_id = user_id)
+       and      meta_id = <s:bind param="meta_id" />
+      group by  date_part('day', message_date)
+     </s:sql>
+   </s:query>
+
+  <s:query name="popular_convo_starters_user_range">
+    <l:description>
+      Shows the most popular conversation starters for a user for a range.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    sender_sn as sender_sn,
+                recipient_sn as recipient_sn,
+                message,
+                count(*)
+      from      im.simple_message_v smv
+      where     not exists (
+                select  'x'
+                from    im.messages
+                where   sender_id in (smv.sender_id, smv.recipient_id)
+                 and    recipient_id in (smv.sender_id, smv.recipient_id)
+                 and    message_date &lt; smv.message_date
+                 and    message_date >
+                        smv.message_date - '10 minutes'::interval)
+                <s:ifNotNull param="user_id">
+                 and    (sender_id = <s:bind param="user_id" />
+                 or recipient_id = <s:bind param="user_id" />)
+               </s:ifNotNull>
+        and     message_date >= <s:bind param="startDate" />
+        and     message_date &lt; <s:bind param="endDate" />
+      group by  sender_sn, recipient_sn, message
+      order by  count(*) desc
+      limit     20
+    </s:sql>
+  </s:query>
+
+  <s:query name="popular_convo_starters_meta_range">
+    <l:description>
+      Shows popular conversation starters with a meta contact for a range.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    sender_sn as sender_sn,
+                recipient_sn as recipient_sn,
+                message,
+                count(*)
+      from      im.simple_message_v smv,
+                im.meta_contact
+      where     not exists (
+                  select  'x' from im.messages
+                  where   sender_id in (smv.sender_id, smv.recipient_id)
+                    and   recipient_id in (smv.sender_id, smv.recipient_id)
+                    and   message_date &lt; smv.message_date
+                    and   message_date >
+                            smv.message_date - '10 minutes'::interval)
+        and     (sender_id = user_id  or recipient_id = user_id)
+        and     meta_id = <s:bind param="meta_id" />
+        and     message_date >= <s:bind param="startDate" />
+        and     message_date &lt; <s:bind param="endDate" />
+      group by  sender_sn,
+                recipient_sn,
+                message
+      order by  count(*) desc
+      limit     20
+    </s:sql>
+  </s:query>
+
+  <s:query name="daily_hourly_totals_user_range">
+    <l:description>
+      Shows total messages for hour and day of a range (month).
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    date_part('day', message_date) as day,
+                date_part('hour', message_date) as hour,
+                count(*) as count
+      from      im.messages
+      where     message_date >= <s:bind param="startDate" />::timestamp
+        and     message_date &lt; <s:bind param="endDate" />::timestamp
+      <s:ifNotNull param="user_id">
+        and     (sender_id = <s:bind param="user_id" />
+                or recipient_id = <s:bind param="user_id" />)
+      </s:ifNotNull>
+      group by  date_part('day', message_date),
+                date_part('hour', message_date)
+    </s:sql>
+  </s:query>
+
+  <s:query name="daily_hourly_totals_meta_range">
+    <l:description>
+      Shows total messages for hour and day of a range (month).
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    date_part('day', message_date) as day,
+                date_part('hour', message_date) as hour,
+                count(*) as count
+      from      im.messages,
+                im.meta_contact
+      where     (sender_id = user_id
+                  or recipient_id = user_id)
+        and     meta_id = <s:bind param="meta_id" />
+        and     message_date >= <s:bind param="startDate" />::timestamp
+        and     message_date &lt; <s:bind param="endDate" />::timestamp
+      group by  date_part('day', message_date),
+                date_part('hour', message_date)
+    </s:sql>
+  </s:query>
+</l:library>

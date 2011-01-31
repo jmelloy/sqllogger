@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Rev: 1079 $ $Date: 2005-05-28 00:59:30 -0500 (Sat, 28 May 2005) $ -->
+<?xml-stylesheet href="querylib.xsl" type="text/xml"?>
+
+<l:library xmlns:l="http://www.slamb.org/axamol/sql-library/library"
+           xmlns:s="http://www.slamb.org/axamol/sql-library/statement"
+           xmlns:d="http://www.slamb.org/documentation"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.slamb.org/axamol/sql-library/library
+           http://www.slamb.org/projects/axamol/sql-library/schema/library.xsd">
+
+  <l:name>SQL Logger Standard Queries</l:name>
+
+  <l:version>
+    $Rev: 1079 $
+    $Date: 2005-05-28 00:59:30 -0500 (Sat, 28 May 2005) $
+  </l:version>
+
+  <l:description>
+    Queries for the SQL Logger.  Do things like getting messages, returning
+    the display name for a user, etc.
+  </l:description>
+
+  <s:query name="user_display_name">
+    <l:description>
+      Gets username and display name for a user.
+    </l:description>
+
+    <s:param name = "user_id" type="integer" />
+
+    <s:sql databases = "pgsql">
+      select    username,
+                display_name,
+                lower(service) as service
+      from      im.users natural join im.user_display_name udn
+      where     user_id = <s:bind param="user_id" />
+       and      not exists (
+                  select  'x'
+                  from    im.user_display_name
+                  where   effdate > udn.effdate
+                   and    user_id = users.user_id
+                )
+    </s:sql>
+  </s:query>
+
+  <s:query name="meta_contained_users">
+    <l:description>
+      Gets a list of all users contained in a meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select  name,
+              users.user_id,
+              lower(service) as service,
+              username,
+              display_name,
+              preferred
+      from    im.meta_container natural join im.meta_contact
+              natural join im.users natural join im.user_display_name udn
+      where   meta_id = <s:bind param="meta_id"/>
+       and    not exists (
+                select  'x'
+                from    im.user_display_name
+                where   user_id = udn.user_id
+                  and   effdate > udn.effdate)
+    </s:sql>
+  </s:query>
+
+  <s:query name="message_times">
+    <l:description>
+      Determines message dates plus and minus a certain time.
+    </l:description>
+
+    <s:param name = "afterTime" type = "integer" />
+    <s:param name = "beforeTime" type = "integer" />
+    <s:param name = "message_id" type = "integer" />
+
+    <s:sql databases="pgsql">
+      select message_date + <s:bind param="afterTime" /> * '1 minute'::interval
+                as finish,
+             message_date - <s:bind param="beforeTime" /> * '1 minute'::interval
+                as start
+      from   im.messages
+      where  message_id = <s:bind param="message_id" />
+    </s:sql>
+  </s:query>
+
+  <s:query name="distinct_services">
+    <l:description>
+      List of all distinct services.
+    </l:description>
+
+    <s:sql databases = "pgsql">
+      select distinct service
+      from im.users
+    </s:sql>
+  </s:query>
+
+  <s:query name="meta_contacts">
+    <l:description>
+      List of all meta contacts with a count
+    </l:description>
+
+    <s:sql databases="pgsql">
+      select    meta_id,
+                name,
+                count(meta_contact.meta_id) as count
+      from      im.meta_container natural left join im.meta_contact
+      group by  meta_id, name
+      order by  name
+    </s:sql>
+  </s:query>
+
+  <s:query name="message_notes">
+
+    <l:description>
+      All message notes attached to a specific message
+    </l:description>
+
+    <s:param name = "message_id" type = "integer" />
+
+    <s:sql databases="pgsql">
+      select    title,
+                notes
+      from      im.message_notes
+      where     message_id = <s:bind param="message_id" />
+      order by  date_added
+    </s:sql>
+  </s:query>
+
+  <s:query name="message_span_display">
+    <l:description>
+      Shows messages spanning a certain time period with display names.
+    </l:description>
+
+    <s:param name="startDate" type = "timestamp" />
+    <s:param name="endDate" type = "timestamp" />
+    <s:param name="sendSN" type = "varchar" />
+    <s:param name="recSN" type = "varchar" />
+    <s:param name="containsSN" type = "varchar" />
+    <s:param name="service" type = "varchar" />
+    <s:param name="limit" type = "integer" />
+
+    <s:sql databases="pgsql">
+      select  sender_sn,
+              recipient_sn,
+              sender_display,
+              recipient_display,
+              message,
+              message_date,
+              message_id,
+              to_char(message_date, 'fmDay, fmMonth DD, YYYY') as fancy_date,
+              message_notes.message_id is not null as notes
+      from    im.message_v as view natural left join im.message_notes
+      where   message_date > coalesce(<s:bind param="startDate" />::timestamp,
+                                      'now'::date)
+       and    message_date &lt; coalesce(<s:bind param="endDate" />::timestamp,
+                                       'infinity')
+       and    (
+                (
+                  <s:bind param="sendSN" /> is null
+                  and <s:bind param="recSN" /> is null)
+                or
+                (
+                  (
+                    (
+                      (
+                        sender_display like <s:bind param="sendSN" />
+                        or sender_sn like <s:bind param="sendSN" />
+                      ) or <s:bind param="sendSN" /> is null
+                    ) and (
+                      (
+                        recipient_display like <s:bind param="recSN" />
+                        or recipient_sn like <s:bind param="recSN" />
+                      )
+                      or <s:bind param="recSN" /> is null
+                    )
+                  ) or (
+                    (
+                      sender_display like <s:bind param="recSN" />
+                      or sender_sn like <s:bind param="recSN" />
+                    ) and (
+                      recipient_display like <s:bind param="sendSN" />
+                      or recipient_sn like <s:bind param="sendSN" />
+                    )
+                  )
+                )
+              )
+       and (
+              <s:bind param="containsSN" /> is null
+              or recipient_sn like <s:bind param="containsSN" />
+              or sender_sn like <s:bind param="containsSN" />
+              or sender_display like <s:bind param="containsSN" />
+              or recipient_display like <s:bind param="containsSN" />
+           )
+       and (
+              <s:bind param="service" /> is null
+              or sender_service = <s:bind param="service" />
+              or recipient_service = <s:bind param="service" />
+           )
+       and not exists (select 'x'
+                       from   im.message_notes b
+                       where  b.message_id = message_notes.message_id
+                        and   b.date_added > message_notes.date_added)
+      order by message_date, message_id
+      <s:ifNotNull param="limit">
+        limit <s:bind param="limit" />
+      </s:ifNotNull>
+    </s:sql>
+  </s:query>
+
+<s:query name="message_span_meta">
+    <l:description>
+      Shows messages spanning a certain time period with meta contacts.
+      Also used for screenname only views because it's fairly speedy.
+    </l:description>
+
+    <s:param name="startDate" type = "timestamp" />
+    <s:param name="endDate" type = "timestamp" />
+    <s:param name="sendSN" type = "varchar" />
+    <s:param name="recSN" type = "varchar" />
+    <s:param name="containsSN" type = "varchar" />
+    <s:param name="service" type = "varchar" />
+    <s:param name="meta_id" type = "integer" />
+    <s:param name="limit" type = "integer" />
+
+    <s:sql databases="pgsql">
+      select  sender_sn,
+              recipient_sn,
+              coalesce(send.name, sender_sn) as sender_meta,
+              coalesce(rec.name, recipient_sn) as recipient_meta,
+              message,
+              message_date,
+              message_id,
+              to_char(message_date, 'fmDay, fmMonth DD, YYYY') as fancy_date,
+              message_notes.message_id is not null as notes
+      from    im.simple_message_v as view
+              left join im.meta_contact r
+                on (recipient_id = r.user_id and r.preferred = true)
+              left join im.meta_container rec
+                on (r.meta_id = rec.meta_id)
+              left join im.meta_contact s
+                on (sender_id = s.user_id and s.preferred = true)
+              left join im.meta_container send
+                on (s.meta_id = send.meta_id)
+              natural left join im.message_notes
+      where   message_date > coalesce(<s:bind param="startDate" />::timestamp,
+                                      'now'::date)
+       and    message_date &lt; coalesce(<s:bind param="endDate" />::timestamp,
+                                       'infinity')
+       and    (
+                (
+                  <s:bind param="sendSN" /> is null
+                  and <s:bind param="recSN" /> is null
+                )
+                or (
+                  (
+                    (
+                      sender_sn like <s:bind param="sendSN" />
+                      or <s:bind param="sendSN" /> is null
+                    ) and (
+                      recipient_sn like <s:bind param="recSN" />
+                      or <s:bind param="recSN" /> is null
+                    )
+                  ) or (
+                     sender_sn like <s:bind param="recSN" />
+                     and recipient_sn like <s:bind param="sendSN" />
+                  )
+                )
+              )
+       and (
+              <s:bind param="containsSN" /> is null
+              or recipient_sn like <s:bind param="containsSN" />
+              or sender_sn like <s:bind param="containsSN" />
+           )
+       and (
+              <s:bind param="service" /> is null
+              or sender_service = <s:bind param="service" />
+              or recipient_service = <s:bind param="service" />
+           )
+       and (<s:bind param="meta_id" /> = 0
+            or send.meta_id = <s:bind param="meta_id" />
+            or rec.meta_id = <s:bind param="meta_id" />
+           )
+       and not exists (select 'x'
+                       from   im.message_notes b
+                       where  b.message_id = message_notes.message_id
+                        and   b.date_added > message_notes.date_added)
+      order by message_date, message_id
+      limit <s:bind param="limit" />
+    </s:sql>
+  </s:query>
+
+  <s:query name="date_range_users">
+    <l:description>
+      Selects all users who spoke over a given date range.
+    </l:description>
+
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select  user_id,
+              service,
+              username
+      from    im.users natural join
+              (select   sender_id as user_id
+               from     im.messages
+               where message_date >
+                  coalesce(<s:bind param="startDate" />::timestamp,
+                    'now'::date)
+                and message_date &lt;
+                  coalesce(<s:bind param="endDate" />::timestamp,
+                    'infinity')
+               union
+               select   recipient_id as user_id
+               from     im.messages
+               where message_date >
+                  coalesce(<s:bind param="startDate" />::timestamp,
+                    'now'::date)
+                and message_date &lt;
+                  coalesce(<s:bind param="endDate" />::timestamp,
+                    'infinity')
+              ) messages
+      order by username
+    </s:sql>
+  </s:query>
+
+  <s:query name="saved_items_list">
+    <l:description>
+      Gets a list of saved items for a particular type.
+    </l:description>
+
+    <s:param name="type" type="varchar" />
+
+    <s:sql databases="pgsql">
+      select  item_id,
+              title,
+              notes
+      from    im.saved_items
+      where   item_type = <s:bind param="type" />
+    </s:sql>
+  </s:query>
+
+  <s:query name="saved_fields">
+    <l:description>
+      Gets all the fields for a particular saved item.
+    </l:description>
+
+    <s:param name="item_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select  title,
+              notes,
+              field_name,
+              value
+      from    im.saved_fields natural join im.saved_items
+      where   item_id = <s:bind param="item_id" />
+    </s:sql>
+  </s:query>
+
+  <s:query name = "information_keys_count">
+    <l:description>
+      Selects a count of keys from information_keys.
+    </l:description>
+
+    <s:sql databases="pgsql">
+      select count(*) as count
+      from   im.information_keys
+      where  delete = false
+    </s:sql>
+  </s:query>
+
+  <s:query name="information_keys">
+    <l:description>
+      Selects all of the info keys.
+    </l:description>
+
+    <s:sql databases="pgsql">
+      select  key_id,
+              key_name
+      from    im.information_keys
+      where   delete = false
+      order by  key_name
+    </s:sql>
+  </s:query>
+
+  <s:query name="possible_login_users">
+    <l:description>
+      Selects a list of users that have spoken with more than one person.
+    </l:description>
+
+    <s:sql databases="pgsql">
+      select  sender_id as user_id,
+              username,
+              login,
+              count(distinct recipient_id)
+      from    im.user_statistics, im.users
+      where   sender_id = user_id
+      group by sender_id, username, login
+      having count(distinct recipient_id) > 1
+      order by username
+    </s:sql>
+  </s:query>
+
+  <s:query name="user_info">
+    <l:description>
+      Selects all user info for a particular user.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select key_name,
+             value
+      from   im.user_contact_info
+      where  user_id = <s:bind param="user_id" />
+      order by key_name
+    </s:sql>
+  </s:query>
+
+  <s:query name="meta_info">
+    <l:description>
+      Select information for a meta-contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select    name,
+                key_id,
+                key_name,
+                value
+      from      im.meta_contact_info
+      where     meta_id = <s:bind param="meta_id" />
+      order by  key_name
+    </s:sql>
+  </s:query>
+
+  <s:query name="meta_info_all_keys">
+    <l:description>
+      Select information for a meta-contact, along with empty fields
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select    name,
+                key_id,
+                key_name,
+                coalesce(value,'') as value
+      from      im.meta_container
+                natural left join im.information_keys
+                natural left join im.contact_information
+      where     meta_id = <s:bind param="meta_id" />
+       and      delete = false
+       order by  key_name
+    </s:sql>
+  </s:query>
+
+  <s:query name="user_info_all_keys">
+    <l:description>
+      Shows information for a user, along with empty fields.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select    username as name,
+                key_id,
+                key_name,
+                coalesce(value, '') as value
+      from      im.users
+                natural left join im.information_keys
+                natural left join im.contact_information
+      where     user_id = <s:bind param="user_id" />
+        and     delete = false
+      order by  key_name
+    </s:sql>
+  </s:query>
+
+  <s:query name="users_starting_with_letter">
+    <l:description>
+      Selects all users starting with a particular letter.
+    </l:description>
+
+    <s:param name = "letter" type="varchar" />
+
+    <s:sql databases="pgsql">
+      select  user_id, username, service, display_name
+      from    im.users natural join im.user_display_name
+      where   not exists (
+                select  'x'
+                from    im.user_display_name udn
+                where   udn.user_id = users.user_id
+                 and    udn.effdate > user_display_name.effdate)
+       and    lower(substr(username, 1, 1)) = <s:bind param="letter" />
+      order by username
+    </s:sql>
+  </s:query>
+
+  <s:query name="users_starting_non_letter">
+    <l:description>
+      Selects all users starting with characters and other symbols.
+    </l:description>
+
+    <s:sql databases="pgsql">
+      select  user_id, username, service, display_name
+      from    im.users natural join im.user_display_name
+      where   not exists (
+                select  'x'
+                from    im.user_display_name udn
+                where   udn.user_id = users.user_id
+                 and    udn.effdate > user_display_name.effdate)
+       and    lower(substr(username, 1, 1)) &lt; 'a'
+      order by username
+    </s:sql>
+  </s:query>
+
+  <s:query name="users_starting_no_display">
+    <l:description>
+      Selects all users starting with a string of characters without display
+      names.
+    </l:description>
+
+    <s:param name = "letters" type="varchar" />
+
+    <s:sql databases="pgsql">
+      select  user_id, username, service
+      from    im.users
+      where   username ~~* <s:bind param="letters" />
+      order by username
+      limit   10
+    </s:sql>
+  </s:query>
+
+  <s:query name="all_users">
+    <l:description>
+      Gets a list of all users, will limit on whether they are a login user.
+    </l:description>
+
+    <s:param name="login" type="varchar" />
+
+    <s:sql databases="pgsql">
+      select  user_id,
+              display_name as display_name,
+              username as username,
+              lower(service) as service
+      from    im.users natural join im.user_display_name udn
+      where   case when 'true' = <s:bind param="login" />
+                then login = true
+                else 1 = 1
+                end
+       and    not exists (select  'x'
+                          from    im.user_display_name
+                          where   user_id = users.user_id
+                           and    effdate > udn.effdate)
+      order by display_name, username
+    </s:sql>
+  </s:query>
+
+  <s:query name="all_chats_sender">
+    <l:description>
+      Gets a list of all the starting conversations for a chat with a
+      particular user.
+    </l:description>
+
+    <s:param name = "user_id" type="integer" />
+    <s:param name = "startDate" type="timestamp" />
+    <s:param name = "endDate" type="timestamp" />
+
+    <s:sql databases = "pgsql">
+        select  to_char(message_date::date, 'Month DD, YYYY (fmDay)')  as date,
+                message_date::time(0) as time,
+                message,
+                message_id,
+                sender_sn,
+                recipient_sn
+        from    im.simple_message_v m
+        where   (sender_id = <s:bind param="user_id" />
+                or recipient_id = <s:bind param="user_id" />)
+        <s:ifNotNull param="startDate">
+          and   m.message_date >= <s:bind param="startDate" />
+        </s:ifNotNull>
+        <s:ifNotNull param="endDate">
+          and   m.message_date &lt; <s:bind param="endDate" />
+        </s:ifNotNull>
+         and    not exists (
+                    select 'x'
+                    from im.messages mess
+                    where (
+                        (mess.sender_id = m.sender_id
+                         and mess.recipient_id = m.recipient_id)
+                        or (mess.sender_id = m.recipient_id
+                            and mess.recipient_id = m.sender_id))
+                     and mess.message_date >=
+                        m.message_date - '10 minutes'::interval
+                    and mess.message_date &lt; m.message_date)
+    </s:sql>
+  </s:query>
+
+  <s:query name="all_chats_meta">
+    <l:description>
+      Shows a list of all chats with a particular meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select  to_char(message_date::date, 'Month DD, YYYY (fmDay)') as date,
+              message_date::time(0) as time,
+              message,
+              message_id
+       from   im.simple_message_v m,
+              im.meta_contact
+       where  (sender_id = user_id or recipient_id = user_id)
+         and  meta_id = <s:bind param="meta_id" />
+        <s:ifNotNull param="startDate">
+          and   m.message_date >= <s:bind param="startDate" />
+        </s:ifNotNull>
+        <s:ifNotNull param="endDate">
+          and   m.message_date &lt; <s:bind param="endDate" />
+        </s:ifNotNull>
+         and  not exists (
+              select  'x'
+              from    im.messages mess
+              where (
+                      (mess.sender_id = m.sender_id
+                      and mess.recipient_id = m.recipient_id)
+                    or (mess.sender_id = m.recipient_id
+                      and mess.recipient_id = m.sender_id))
+               and mess.message_date >= m.message_date - '10 minutes'::interval
+               and mess.message_date &lt; m.message_date)
+    </s:sql>
+  </s:query>
+
+  <s:query name="distinct_months_user">
+    <l:description>
+      Gets a list of months with data for a user.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select distinct
+              period,
+              to_char(period, 'MM') as month_num,
+              to_char(period, 'Mon') as month_abb,
+              to_char(period, 'Month') as month_name,
+              to_char(period, 'YYYY') as year,
+              date_trunc('month', period) as month_start,
+              period + '1 month'::interval as last_day
+      from    im.user_statistics
+      <s:ifNotNull param="user_id">
+      where   sender_id = <s:bind param="user_id" />
+       or     recipient_id = <s:bind param="user_id" />
+      </s:ifNotNull>
+      order by period
+    </s:sql>
+  </s:query>
+
+  <s:query name="distinct_months_meta">
+    <l:description>
+      Gets a list of months with data for a meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      select distinct
+              period,
+              to_char(period, 'MM') as month_num,
+              to_char(period, 'Mon') as month_abb,
+              to_char(period, 'Month') as month_name,
+              to_char(period, 'YYYY') as year,
+              date_trunc('month', period) as month_start,
+              period + '1 month'::interval as last_day
+      from    im.user_statistics, im.meta_contact
+      where   (sender_id = user_id
+       or     recipient_id = user_id)
+        and   meta_id = <s:bind param="meta_id" />
+      order by period
+    </s:sql>
+  </s:query>
+
+  <s:query name="check_for_tsearch">
+    <l:description>
+      Queries the system tables to see if tsearch types exist
+    </l:description>
+
+    <s:sql databases="pgsql">
+      select  typname
+      from    pg_catalog.pg_type t
+      where   typname ~ '^txtid$'
+        or    typname ~ '^tsquery$'
+       and    pg_catalog.pg_type_is_visible(t.oid)
+      order by typname
+    </s:sql>
+  </s:query>
+
+  <s:query name="search_none">
+    <l:description>
+      Extremely slow query for searching without tsearch.
+    </l:description>
+
+    <s:param name="search" type="varchar" />
+    <s:param name="username" type="varchar" />
+    <s:param name="dateStart" type = "timestamp" />
+    <s:param name="dateFinish" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select    sender_sn,
+                recipient_sn,
+                message,
+                message_date,
+                to_char(message_date, 'Mon DD, YYYY') as date,
+                message_id
+      from      im.simple_message_v
+      where     message ~ <s:bind param="search" />
+      <s:ifNotNull param="username">
+        and     (sender_sn like <s:bind param="username" />
+                or recipient_sn like <s:bind param="username" />)
+      </s:ifNotNull>
+      <s:ifNotNull param="dateStart">
+        and      message_date >= <s:bind param="dateStart" />
+      </s:ifNotNull>
+      <s:ifNotNull param="dateFinish">
+        and      message_date &lt;= <s:bind param="dateFinish" />
+      </s:ifNotNull>
+    </s:sql>
+  </s:query>
+
+  <s:query name="search_tsearch1">
+    <l:description>
+      Gets search results for tsearch.
+    </l:description>
+
+    <s:param name="search" type="varchar" />
+    <s:param name="username" type = "varchar" />
+    <s:param name="dateStart" type="timestamp" />
+    <s:param name="dateFinish" type = "timestamp" />
+    <s:param name="matchRegexp" type = "varchar" list="true"/>
+
+    <s:sql databases="pgsql">
+      select    s.username as sender_sn,
+                s.service as sender_service,
+                r.service as recipient_service,
+                r.username as recipient_sn,
+                message,
+                message_date,
+                to_char(message_date, 'Mon DD, YYYY') as date,
+                message_id
+      from      im.messages,
+                im.users s,
+                im.users r
+      where     messages.sender_id = s.user_id
+        and     messages.recipient_id = r.user_id
+        and     message_idx ## <s:bind param="search" />
+        <s:bindlist param="matchRegexp" each=" and message ~* ?" join="" />
+      <s:ifNotNull param="username">
+        and      (s.username like <s:bind param="username" />
+                  or r.username like <s:bind param="username" />)
+      </s:ifNotNull>
+      <s:ifNotNull param="dateStart">
+        and      message_date >= <s:bind param="dateStart" />
+      </s:ifNotNull>
+      <s:ifNotNull param="dateFinish">
+        and      message_date &lt;= <s:bind param="dateFinish" />
+      </s:ifNotNull>
+    </s:sql>
+  </s:query>
+
+  <s:query name="search_tsearch2">
+    <l:description>
+      Search using tsearch2 methods.
+    </l:description>
+
+    <s:param name="search" type="varchar" />
+    <s:param name="username" type = "varchar" />
+    <s:param name="dateStart" type="timestamp" />
+    <s:param name="dateFinish" type = "timestamp" />
+    <s:param name="matchRegexp" type="varchar" list="true" />
+
+    <s:sql databases="pgsql">
+      select    s.username as sender_sn,
+                r.username as recipient_sn,
+                s.service as sender_service,
+                r.service as recipient_service,
+                ts_headline(message, q) as message,
+                message_date,
+                to_char(message_date, 'Mon DD, YYYY') as date,
+                message_id,
+                ts_rank(idxfti, q) as rank
+      from      im.messages,
+                im.users s,
+                im.users r,
+                to_tsquery(<s:bind param="search" />) as q
+      where     messages.sender_id = s.user_id
+        and     messages.recipient_id = r.user_id
+        and     idxfti @@ q
+        <s:bindlist param="matchRegexp" each=" and message ~* ?" join="" />
+      <s:ifNotNull param="username">
+        and      (s.username like <s:bind param="username" />
+                  or r.username like <s:bind param="username" />)
+      </s:ifNotNull>
+      <s:ifNotNull param="dateStart">
+        and      message_date >= <s:bind param="dateStart" />
+      </s:ifNotNull>
+      <s:ifNotNull param="dateFinish">
+        and      message_date &lt;= <s:bind param="dateFinish" />
+      </s:ifNotNull>
+    </s:sql>
+  </s:query>
+
+  <s:query name="date_ranges">
+    <l:description>
+      Grab first day of the week, month, etc.
+    </l:description>
+
+    <s:sql databases="pgsql">
+      select  CURRENT_DATE::timestamp as today,
+              CURRENT_DATE - '1 day'::interval as yesterday,
+              date_trunc('week', CURRENT_DATE) as week,
+              date_trunc('mon', CURRENT_DATE) as month,
+              date_trunc('year', CURRENT_DATE) as year;
+    </s:sql>
+  </s:query>
+
+  <s:query name="all_users_except_meta">
+    <l:description>
+      Show all users not included in a particular meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type = "integer" />
+    <s:param name="service" type = "varchar" />
+    <s:param name="username" type = "varchar" />
+
+    <s:sql databases="pgsql">
+      select  user_id,
+              display_name || ' (' || service || '.' || username || ')'
+                as full_display
+      from    im.users natural join im.user_display_name udn
+      where   not exists
+              (select   'x'
+              from      im.user_display_name
+              where     user_id = udn.user_id
+                and     effdate > udn.effdate)
+        and   not exists
+              (select   'x'
+              from      im.meta_contact
+              where     meta_id = <s:bind param="meta_id" />
+                and     user_id = users.user_id)
+      <s:ifNotNull param="username">
+        and   username ilike <s:bind param="username" />
+      </s:ifNotNull>
+      <s:ifNotNull param="service">
+        and   service = <s:bind param="service" />
+      </s:ifNotNull>
+      order by display_name, username
+    </s:sql>
+  </s:query>
+
+  <s:query name="message_urls">
+    <l:description>
+      Grabs all messages with a URL in them between given dates.
+    </l:description>
+
+    <s:param name="startDate" type="timestamp" />
+    <s:param name="endDate" type="timestamp" />
+
+    <s:sql databases="pgsql">
+      select  sender_sn,
+              recipient_sn,
+              message,
+              message_date
+      from    im.simple_message_v
+      where   message ~* '(.*http:\\/\\/.*)|(.*&lt;a href.*?&lt;/a>.*)'
+      <s:ifNotNull param="endDate">
+        and   message_date &lt;= <s:bind param="endDate" />
+      </s:ifNotNull>
+      <s:ifNotNull param="startDate">
+        and    message_date >= <s:bind param="startDate" />
+      </s:ifNotNull>
+      order by message_date desc
+    </s:sql>
+  </s:query>
+</l:library>

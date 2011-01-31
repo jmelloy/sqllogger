@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- $Rev: 1057 $ $Date: 2005-04-05 20:01:12 -0500 (Tue, 05 Apr 2005) $ -->
+<?xml-stylesheet href="querylib.xsl" type="text/xml"?>
+
+<l:library xmlns:l="http://www.slamb.org/axamol/sql-library/library"
+           xmlns:s="http://www.slamb.org/axamol/sql-library/statement"
+           xmlns:d="http://www.slamb.org/documentation"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.slamb.org/axamol/sql-library/library
+                               http://www.slamb.org/projects/axamol/sql-library/schema/library.xsd">
+
+  <l:name>
+    Update and Insert
+  </l:name>
+
+  <l:version>
+    $Rev: 1057 $ $Date: 2005-04-05 20:01:12 -0500 (Tue, 05 Apr 2005) $
+  </l:version>
+
+  <l:description>
+    Queries for the SQL Logger dealing with updating and inserting of records.
+  </l:description>
+
+  <s:query name="count_service_user">
+    <l:description>
+      Gets count of users that match a username or service.
+    </l:description>
+
+    <s:param name="username" type="varchar" />
+    <s:param name="service" type="varchar" />
+
+    <s:sql databases="pgsql">
+      select  count(*)
+      from    im.users
+      where   (service = <s:bind param="service" />
+              or <s:bind param="service" /> is null)
+       and    (username ilike <s:bind param="username" />
+              or <s:bind param="username" /> is null)
+    </s:sql>
+  </s:query>
+
+  <s:query name="get_user_id">
+    <l:description>
+      Gets user_id that matches criteria.
+    </l:description>
+
+    <s:param name="username" type="varchar" />
+    <s:param name="service" type="varchar" />
+
+    <s:sql databases="pgsql">
+      select  user_id
+      from    im.users
+      where   (service = <s:bind param="service" />
+             or <s:bind param="service" /> is null)
+      and    (username ilike <s:bind param="username" />
+      or <s:bind param="username" /> is null)
+    </s:sql>
+  </s:query>
+
+  <s:update name="add_all_users_to_meta">
+    <l:description>
+      Adds users to a meta contact matching the input criteria.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="username" type="varchar" />
+    <s:param name="service" type="varchar" />
+
+    <s:sql databases="pgsql">
+      insert into meta_contact (meta_id, user_id)
+      (select  <s:bind param="meta_id" />, user_id
+      from     im.users
+      where    (service = <s:bind param="service" />
+                or <s:bind param="service" /> is null)
+       and     (username ilike <s:bind param="username" />
+                or <s:bind param="username" /> is null))
+    </s:sql>
+  </s:update>
+
+  <s:update name="add_user_to_meta">
+    <l:description>
+       Adds a user_id to a meta_id, setting preferred to true if it is the
+       first one.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="user_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      insert into im.meta_contact (meta_id, user_id, preferred)
+      (select  <s:bind param="meta_id" />,
+               <s:bind param="user_id" />,
+               (select   count(*)
+               from      im.meta_contact
+               where     user_id = <s:bind param="user_id" />) = 0)
+    </s:sql>
+  </s:update>
+
+  <s:query name="currval">
+    <l:description>
+      Gets the current value of a sequence.
+    </l:description>
+
+    <s:param name="sequence" type="varchar" />
+
+    <s:sql databases="pgsql">
+      select currval(<s:bind param="sequence" />)
+    </s:sql>
+  </s:query>
+
+  <s:update name="add_meta">
+    <l:description>
+      Adds a meta contact.
+    </l:description>
+
+    <s:param name="name" type="varchar" />
+
+    <s:sql databases="pgsql">
+      insert into im.meta_container (name) values (<s:bind param="name" />)
+    </s:sql>
+  </s:update>
+
+  <s:query name="all_info_keys">
+    <l:description>
+      Gets all keys.
+    </l:description>
+
+    <s:sql databases="pgsql">
+      select    key_id, key_name, delete
+      from      im.information_keys
+      order by  key_name
+    </s:sql>
+  </s:query>
+
+  <s:update name="insert_meta_key_info">
+    <l:description>
+      Adds a key to the attached meta_contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="key_id" type="integer" />
+    <s:param name="value" type="varchar" />
+
+    <s:sql databases="pgsql">
+      insert into im.contact_information
+      (meta_id, key_id, value)
+      values (<s:bind param="meta_id" />, <s:bind param="key_id" />,
+      <s:bind param="value" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="delete_user_from_meta">
+    <l:description>
+      Deletes a meta user.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+    <s:param name="meta_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      delete from im.meta_contact
+      where   (user_id = <s:bind param="user_id" />
+               or <s:bind param="user_id" /> = 0)
+      and     meta_id = <s:bind param="meta_id" />
+    </s:sql>
+  </s:update>
+
+  <s:update name="insert_message_note">
+    <l:description>
+      Inserts a message note.
+    </l:description>
+
+    <s:param name="message_id" type="integer" />
+    <s:param name="title" type="varchar" />
+    <s:param name="notes" type="varchar" />
+
+    <s:sql databases="pgsql">
+      insert into im.message_notes (message_id, title, notes)
+      values (<s:bind param="message_id" />,
+              <s:bind param="title" />,
+              <s:bind param="notes" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="delete_keys">
+    <l:description>
+      Deletes a key
+    </l:description>
+
+    <s:param name="key_list" type="integer" list="true"/>
+
+    <s:sql databases="pgsql">
+      update  im.information_keys
+      set     delete = true
+      where   delete = false
+       and    key_id in (<s:bindlist param="key_list" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="undelete_keys">
+    <l:description>
+      Sets a key to true that was previously false.
+    </l:description>
+
+    <s:param name="key_list" type="integer"  list="true" />
+
+    <s:sql databases="pgsql">
+      update  im.information_keys
+      set     delete = false
+      where   delete = true
+      and    key_id not in (<s:bindlist param="key_list" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="insert_key">
+    <l:description>
+      Inserts a key
+    </l:description>
+
+    <s:param name="name" type="varchar" />
+
+    <s:sql databases="pgsql">
+      insert into im.information_keys (key_name)
+      values (<s:bind param="name" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="remove_login_user">
+    <l:description>
+      Sets login user to false for login users not on the list
+    </l:description>
+
+    <s:param name="user_list" type="integer" list="true" />
+
+    <s:sql databases="pgsql">
+      update im.users
+      set login = false
+      where login = true and user_id not in
+      (<s:bindlist param="user_list" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="add_login_user">
+    <l:description>
+      Sets login user to true for the passed list.
+    </l:description>
+
+    <s:param name="user_list" type="integer" list="true" />
+
+    <s:sql databases="pgsql">
+      update im.users set login = true where login = false and user_id in
+      (<s:bindlist param="user_list" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="delete_meta_contact">
+    <l:description>
+      Deletes a meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      delete from im.meta_container
+      where meta_id = <s:bind param="meta_id" />
+    </s:sql>
+  </s:update>
+
+  <s:update name="change_meta_name">
+    <l:description>
+      Updates the name of a meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="name" type="varchar" />
+
+    <s:sql databases="pgsql">
+      update im.meta_container
+      set name = <s:bind param="name" />
+      where meta_id = <s:bind param="meta_id" />
+    </s:sql>
+  </s:update>
+
+  <s:update name="update_meta_info">
+    <l:description>
+      Updates a meta contact info field.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="key_id" type="integer" />
+    <s:param name="value" type="varchar" />
+
+    <s:sql databases="pgsql">
+      update  im.contact_information
+      set     value = <s:bind param="value" />
+      where   key_id = <s:bind param="key_id" />
+       and    meta_id = <s:bind param="meta_id" />
+     </s:sql>
+   </s:update>
+
+   <s:update name="delete_meta_info">
+    <l:description>
+      Deletes a key for a meta contact.
+    </l:description>
+
+    <s:param name="meta_id" type="integer" />
+    <s:param name="key_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      delete  from im.contact_information
+      where   meta_id = <s:bind param="meta_id" />
+       and    (key_id = <s:bind param="key_id" />
+               or <s:bind param="key_id" /> = 0)
+     </s:sql>
+   </s:update>
+
+   <s:update name="preferred_true">
+     <l:description>
+       Sets preferred to true for a user/meta contact.
+     </l:description>
+
+     <s:param name="meta_id" type="integer" />
+     <s:param name="user_id" type="integer" />
+
+     <s:sql databases="pgsql">
+       update im.meta_contact
+       set    preferred = true
+       where  user_id = <s:bind param="user_id" />
+       and   meta_id = <s:bind param="meta_id" />
+     </s:sql>
+   </s:update>
+
+   <s:update name="preferred_false">
+     <l:description>
+       Sets preferred to true for a user/meta contact.
+     </l:description>
+
+     <s:param name="meta_id" type="integer" />
+     <s:param name="user_id" type="integer" />
+
+     <s:sql databases="pgsql">
+       update im.meta_contact
+       set    preferred = false
+       where  user_id = <s:bind param="user_id" />
+       and   meta_id &lt;> <s:bind param="meta_id" />
+     </s:sql>
+   </s:update>
+
+  <s:update name="update_user_info">
+    <l:description>
+      Updates a user contact info field.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+    <s:param name="key_id" type="integer" />
+    <s:param name="value" type="varchar" />
+
+    <s:sql databases="pgsql">
+      update  im.contact_information
+      set     value = <s:bind param="value" />
+      where   key_id = <s:bind param="key_id" />
+       and    user_id = <s:bind param="user_id" />
+     </s:sql>
+   </s:update>
+
+   <s:update name="delete_user_info">
+    <l:description>
+      Deletes a key for a user contact.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+    <s:param name="key_id" type="integer" />
+
+    <s:sql databases="pgsql">
+      delete  from im.contact_information
+      where   user_id = <s:bind param="user_id" />
+       and    key_id = <s:bind param="key_id" />
+     </s:sql>
+   </s:update>
+
+   <s:update name="insert_user_info">
+    <l:description>
+      Adds a key to the attached user_contact.
+    </l:description>
+
+    <s:param name="user_id" type="integer" />
+    <s:param name="key_id" type="integer" />
+    <s:param name="value" type="varchar" />
+
+    <s:sql databases="pgsql">
+      insert into im.contact_information
+      (user_id, key_id, value)
+      values (<s:bind param="user_id" />, <s:bind param="key_id" />,
+      <s:bind param="value" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="insert_saved_form">
+    <l:description>
+      Adds a saved form.
+    </l:description>
+
+    <s:param name="title" type="varchar" />
+    <s:param name="notes" type="varchar" />
+    <s:param name="type" type="varchar" />
+
+    <s:sql databases="pgsql">
+      insert into im.saved_items (title, notes, item_type)
+      values (<s:bind param="title" />,
+              <s:bind param="notes" />,
+              <s:bind param="type" />)
+    </s:sql>
+  </s:update>
+
+  <s:update name="insert_saved_fields">
+    <l:description>
+      Adds a field to a saved form.
+    </l:description>
+
+    <s:param name="key" type="varchar" />
+    <s:param name="value" type="varchar" />
+    <s:param name="seq" type="integer" />
+
+    <s:sql databases="pgsql">
+      insert into im.saved_fields (item_id, field_name, value)
+      values (<s:bind param="seq" />,
+              <s:bind param="key" />,
+              <s:bind param="value" />)
+    </s:sql>
+  </s:update>
+ </l:library>

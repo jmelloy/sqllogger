@@ -1,0 +1,22 @@
+{
+    IBClasses = (
+        {
+            CLASS = AIAlternatingRowOutlineView; 
+            LANGUAGE = ObjC; 
+            SUPERCLASS = NSOutlineView; 
+        }, 
+        {
+            ACTIONS = {closeWindow = id; }; 
+            CLASS = AILogViewerWindowController; 
+            LANGUAGE = ObjC; 
+            OUTLETS = {
+                "outlineView_contacts" = NSOutlineView; 
+                "tableView_results" = NSTableView; 
+                "textView_content" = NSTextView; 
+            }; 
+            SUPERCLASS = NSWindowController; 
+        }, 
+        {CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }
+    ); 
+    IBVersion = 1; 
+}

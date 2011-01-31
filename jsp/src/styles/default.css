@@ -1,0 +1,214 @@
+body {
+    background: #369;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", verdana, lucida, sans-serif;
+    font-size: 11px;
+}
+
+a, a:link, a:visited
+{
+    color: #006600;
+    text-decoration: none;
+}
+
+a:hover
+{
+    color: #ff9934;
+    text-decoration: underline;
+}
+
+form {
+    margin: 0px;
+}
+
+#header {
+    background: url(../images/bordertop.png) no-repeat;
+}
+
+#banner {
+    background: url(../images/bordercentral.png) repeat-y;
+}
+
+#banner .text {
+    color: #2E2E2E;
+    text-align: center;
+}
+
+#banner .text h1 {
+    font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: normal;
+    text-shadow: 2px 2px 3px gray;
+}
+
+#banner .text h2 {
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/*<group=navbar>*/
+#navcontainer
+{
+    border-bottom: 1px solid #B7B7B7;
+}
+
+#navcontainer ul
+{
+    list-style-type: none;
+    text-align: center;
+}
+
+#navcontainer ul li
+{
+    text-align: center;
+}
+
+#navcontainer ul li #current
+{
+    background: #f5f5f5;
+    border-top: 1px solid #cccccc;
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #CCCCCC;
+    border-bottom: solid 1px #f5f5f5;
+    color: black;
+    text-align: center;
+    font-size: 10px;
+    line-height: 18px;
+}
+
+#navcontainer ul li a
+{
+    background: #fff url(../images/tab_off_bg.gif) repeat-x;
+    border: 1px solid #cccccc;
+    text-decoration: none;
+    text-align: center;
+    font-size: 10px;
+    line-height: 18px;
+    border-bottom-style: none;
+    color: black;
+}
+
+#navcontainer ul li a:hover
+{
+    color: black;
+    background: white;
+}
+
+/*</group>*/
+
+#central {
+    background: url(../images/bordercentral.png) repeat-y;
+}
+
+#content {
+    background: repeat-y #F5F5F5;
+}
+
+#content h1 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+}
+
+#content h2 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+}
+
+#content .code {
+    font-family: "Courier New", Courier, mono;
+    font-weight: bold;
+    color: black;
+}
+
+.boxWideTop {
+    background: url(../images/boxWideTopBorder.png) no-repeat;
+}
+
+.boxWideContent {
+    border-left: 1px solid #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+    background: #FAFAFA;
+    color: #444;
+    font-size: 11px;
+}
+
+.boxWideBottom {
+    background: url(../images/boxWideBottomBorder.png) no-repeat;
+}
+
+.boxExtraWideTop {
+	background: url(../images/boxExtraWideTopBorder.png) no-repeat;
+}
+
+.boxExtraWideContent {
+	border-left: 1px solid #C0C0C0;
+	border-right: 1px solid #C0C0C0;
+	background: #FAFAFA;
+	color: #444;
+	font-size: 11px;
+	width: 697px;
+}
+
+.boxExtraWideBottom {
+	background: url(../images/boxExtraWideBottomBorder.png) no-repeat;
+}
+
+
+
+/*<group=Weblog>*/
+
+.weblogDateHeader {
+    border: 1px solid #CCCCCC;
+    font-weight: bold;
+    color: #333;
+}
+
+/*</group>*/
+
+#sidebar-a {
+    background: right  repeat-y;
+}
+
+.boxThinTop {
+    background: url(../images/boxThinTopBorder.png) no-repeat;
+}
+
+.boxThinContent {
+    border-left: 1px solid #C0C0C0;
+    border-right: 1px solid #C0C0C0;
+    background: #FAFAFA;
+    color: #444;
+    font-size: 11px;
+}
+
+.boxThinBottom {
+    background: url(../images/boxThinBottomBorder.png) no-repeat;
+}
+
+#sidebar-a h1 {
+    font-size: 13px;
+    font-weight: bold;
+    color: #333;
+}
+
+#sidebar-a .tiny {
+    font-size: 10px;
+    color: rgb(128, 128, 128);
+}
+
+#sidebar-a .date {
+    color: rgb(128, 128, 128);
+}
+
+/*<group=Powered>*/
+
+#bottom {
+    border-top: 1px solid #B7B7B7;
+}
+
+/*</group>*/
+
+#footer {
+    background: url(../images/borderbottom.png) no-repeat;
+}

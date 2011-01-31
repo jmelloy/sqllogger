@@ -1,0 +1,2898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project version="2">
+	<attribs>
+		<attrib name="build">7</attrib>
+		<attrib name="serial">2493</attrib>
+	</attribs>
+	<database>
+		<attribs>
+			<attrib name="name">SQL Logger</attrib>
+			<attrib name="preSql">BEGIN WORK;
+</attrib>
+			<attrib name="postSql">COMMIT;
+</attrib>
+			<attrib name="ddUseDDEquiv">false</attrib>
+			<attrib name="codeUseBuild">true</attrib>
+			<attrib name="summUseDDEquiv">true</attrib>
+		</attribs>
+		<revisions>
+			<list>
+				<header>
+					<elem>version</elem>
+					<elem>date</elem>
+					<elem>descr</elem>
+				</header>
+			</list>
+		</revisions>
+		<fieldAttribs>
+			<list>
+				<header>
+					<elem>id</elem>
+					<elem>name</elem>
+					<elem>sqlName</elem>
+					<elem>type</elem>
+					<elem>scope</elem>
+					<elem>useInDD</elem>
+					<elem>useInSumm</elem>
+					<elem>width</elem>
+					<elem>descr</elem>
+				</header>
+				<row>
+					<elem>15</elem>
+					<elem>PrKey</elem>
+					<elem>primary key</elem>
+					<elem>b</elem>
+					<elem>t</elem>
+					<elem>false</elem>
+					<elem>true</elem>
+					<elem>60</elem>
+					<elem>Primary key for a table</elem>
+				</row>
+				<row>
+					<elem>16</elem>
+					<elem>Unq</elem>
+					<elem>unique</elem>
+					<elem>b</elem>
+					<elem>f</elem>
+					<elem>false</elem>
+					<elem>true</elem>
+					<elem>60</elem>
+					<elem>Unique for a single field</elem>
+				</row>
+				<row>
+					<elem>17</elem>
+					<elem>NotN</elem>
+					<elem>not null</elem>
+					<elem>b</elem>
+					<elem>f</elem>
+					<elem>false</elem>
+					<elem>true</elem>
+					<elem>60</elem>
+					<elem/>
+				</row>
+				<row>
+					<elem>338</elem>
+					<elem>MUnq</elem>
+					<elem>unique</elem>
+					<elem>b</elem>
+					<elem>t</elem>
+					<elem>false</elem>
+					<elem>true</elem>
+					<elem>60</elem>
+					<elem>Unique for several fields</elem>
+				</row>
+				<row>
+					<elem>339</elem>
+					<elem>Def</elem>
+					<elem>default</elem>
+					<elem>s</elem>
+					<elem>f</elem>
+					<elem>false</elem>
+					<elem>true</elem>
+					<elem>60</elem>
+					<elem>Field's default value </elem>
+				</row>
+				<row>
+					<elem>340</elem>
+					<elem>Idx1</elem>
+					<elem>{table}IDX{cnt}</elem>
+					<elem>b</elem>
+					<elem>i</elem>
+					<elem>false</elem>
+					<elem>true</elem>
+					<elem>60</elem>
+					<elem>An index</elem>
+				</row>
+				<row>
+					<elem>115</elem>
+					<elem>Udx1</elem>
+					<elem/>
+					<elem>b</elem>
+					<elem>u</elem>
+					<elem>false</elem>
+					<elem>false</elem>
+					<elem>60</elem>
+					<elem/>
+				</row>
+				<row>
+					<elem>116</elem>
+					<elem>Idx1</elem>
+					<elem/>
+					<elem>b</elem>
+					<elem>i</elem>
+					<elem>false</elem>
+					<elem>false</elem>
+					<elem>60</elem>
+					<elem/>
+				</row>
+				<row>
+					<elem>117</elem>
+					<elem>Idx2</elem>
+					<elem/>
+					<elem>b</elem>
+					<elem>i</elem>
+					<elem>false</elem>
+					<elem>false</elem>
+					<elem>60</elem>
+					<elem/>
+				</row>
+				<row>
+					<elem>118</elem>
+					<elem>Idx3</elem>
+					<elem/>
+					<elem>b</elem>
+					<elem>i</elem>
+					<elem>false</elem>
+					<elem>false</elem>
+					<elem>60</elem>
+					<elem/>
+				</row>
+				<row>
+					<elem>119</elem>
+					<elem>Idx4</elem>
+					<elem/>
+					<elem>b</elem>
+					<elem>i</elem>
+					<elem>false</elem>
+					<elem>false</elem>
+					<elem>60</elem>
+					<elem/>
+				</row>
+				<row>
+					<elem>120</elem>
+					<elem>Idx5</elem>
+					<elem/>
+					<elem>b</elem>
+					<elem>i</elem>
+					<elem>false</elem>
+					<elem>false</elem>
+					<elem>60</elem>
+					<elem/>
+				</row>
+			</list>
+		</fieldAttribs>
+		<modsConfig>
+			<DocsGenModule>
+				<html>
+					<output>/Users/jmelloy/sqllogger_druid</output>
+				</html>
+			</DocsGenModule>
+		</modsConfig>
+		<modsUsage>
+			<module name="DocsGenModule.html"/>
+		</modsUsage>
+		<dataTypes>
+			<constFolder>
+				<type>
+					<attribs>
+						<attrib name="name">bool</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">382</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">box</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">383</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">cidr</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">384</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">circle</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">385</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">date</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">386</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">decimal</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">35</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">float4</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">388</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">float8</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">389</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">inet</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">387</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">int2</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">390</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">int4</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">391</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">int8</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">392</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">interval</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">37</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">line</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">393</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">lseg</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">394</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">money</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">395</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">numeric</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">38</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">path</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">396</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">point</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">397</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">polygon</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">398</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">serial</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">36</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">time</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">400</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">timetz</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">404</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">timestamp</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">401</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">timestamptz</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">42</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">char</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">402</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">text</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">403</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">name</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">39</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">bytea</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">40</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">macaddr</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">41</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">INTEGER</attrib>
+						<attrib name="ddEquiv"/>
+						<attrib name="id">48</attrib>
+					</attribs>
+					<domain>
+						<attribs>
+							<attrib name="minValue"/>
+							<attrib name="outRange">false</attrib>
+							<attrib name="maxValue"/>
+							<attrib name="type">none</attrib>
+						</attribs>
+						<list>
+							<header>
+								<elem>value</elem>
+							</header>
+						</list>
+					</domain>
+					<aliases/>
+				</type>
+			</constFolder>
+			<varFolder>
+				<type>
+					<attribs>
+						<attrib name="name">char</attrib>
+					</attribs>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">varchar</attrib>
+					</attribs>
+					<aliases>
+						<alias>
+							<attribs>
+								<attrib name="name">VARCHAR-1</attrib>
+								<attrib name="ddEquiv"/>
+								<attrib name="id">45</attrib>
+								<attrib name="size">-1</attrib>
+							</attribs>
+							<domain>
+								<attribs>
+									<attrib name="minValue"/>
+									<attrib name="outRange">false</attrib>
+									<attrib name="maxValue"/>
+									<attrib name="type">none</attrib>
+								</attribs>
+								<list>
+									<header>
+										<elem>value</elem>
+									</header>
+								</list>
+							</domain>
+						</alias>
+						<alias>
+							<attribs>
+								<attrib name="name">VARCHAR8096</attrib>
+								<attrib name="ddEquiv"/>
+								<attrib name="id">62</attrib>
+								<attrib name="size">8096</attrib>
+							</attribs>
+							<domain>
+								<attribs>
+									<attrib name="minValue"/>
+									<attrib name="outRange">false</attrib>
+									<attrib name="maxValue"/>
+									<attrib name="type">none</attrib>
+								</attribs>
+								<list>
+									<header>
+										<elem>value</elem>
+									</header>
+								</list>
+							</domain>
+						</alias>
+						<alias>
+							<attribs>
+								<attrib name="name">VARCHAR30</attrib>
+								<attrib name="ddEquiv"/>
+								<attrib name="id">89</attrib>
+								<attrib name="size">30</attrib>
+							</attribs>
+							<domain>
+								<attribs>
+									<attrib name="minValue"/>
+									<attrib name="outRange">false</attrib>
+									<attrib name="maxValue"/>
+									<attrib name="type">none</attrib>
+								</attribs>
+								<list>
+									<header>
+										<elem>value</elem>
+									</header>
+								</list>
+							</domain>
+						</alias>
+						<alias>
+							<attribs>
+								<attrib name="name">VARCHAR300</attrib>
+								<attrib name="ddEquiv"/>
+								<attrib name="id">102</attrib>
+								<attrib name="size">300</attrib>
+							</attribs>
+							<domain>
+								<attribs>
+									<attrib name="minValue"/>
+									<attrib name="outRange">false</attrib>
+									<attrib name="maxValue"/>
+									<attrib name="type">none</attrib>
+								</attribs>
+								<list>
+									<header>
+										<elem>value</elem>
+									</header>
+								</list>
+							</domain>
+						</alias>
+						<alias>
+							<attribs>
+								<attrib name="name">VARCHAR50</attrib>
+								<attrib name="ddEquiv"/>
+								<attrib name="id">112</attrib>
+								<attrib name="size">50</attrib>
+							</attribs>
+							<domain>
+								<attribs>
+									<attrib name="minValue"/>
+									<attrib name="outRange">false</attrib>
+									<attrib name="maxValue"/>
+									<attrib name="type">none</attrib>
+								</attribs>
+								<list>
+									<header>
+										<elem>value</elem>
+									</header>
+								</list>
+							</domain>
+						</alias>
+					</aliases>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">bit varying</attrib>
+					</attribs>
+					<aliases/>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">BIT</attrib>
+					</attribs>
+					<aliases>
+						<alias>
+							<attribs>
+								<attrib name="name">BIT1</attrib>
+								<attrib name="ddEquiv"/>
+								<attrib name="id">51</attrib>
+								<attrib name="size">1</attrib>
+							</attribs>
+							<domain>
+								<attribs>
+									<attrib name="minValue"/>
+									<attrib name="outRange">false</attrib>
+									<attrib name="maxValue"/>
+									<attrib name="type">none</attrib>
+								</attribs>
+								<list>
+									<header>
+										<elem>value</elem>
+									</header>
+								</list>
+							</domain>
+						</alias>
+					</aliases>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">TIMESTAMP</attrib>
+					</attribs>
+					<aliases>
+						<alias>
+							<attribs>
+								<attrib name="name">TIMESTAMP8</attrib>
+								<attrib name="ddEquiv"/>
+								<attrib name="id">57</attrib>
+								<attrib name="size">8</attrib>
+							</attribs>
+							<domain>
+								<attribs>
+									<attrib name="minValue"/>
+									<attrib name="outRange">false</attrib>
+									<attrib name="maxValue"/>
+									<attrib name="type">none</attrib>
+								</attribs>
+								<list>
+									<header>
+										<elem>value</elem>
+									</header>
+								</list>
+							</domain>
+						</alias>
+					</aliases>
+				</type>
+				<type>
+					<attribs>
+						<attrib name="name">OTHER</attrib>
+					</attribs>
+					<aliases>
+						<alias>
+							<attribs>
+								<attrib name="name">tsvector</attrib>
+								<attrib name="ddEquiv"/>
+								<attrib name="id">66</attrib>
+								<attrib name="size">-1</attrib>
+							</attribs>
+							<domain>
+								<attribs>
+									<attrib name="minValue"/>
+									<attrib name="outRange">false</attrib>
+									<attrib name="maxValue"/>
+									<attrib name="type">none</attrib>
+								</attribs>
+								<list>
+									<header>
+										<elem>value</elem>
+									</header>
+								</list>
+							</domain>
+						</alias>
+					</aliases>
+				</type>
+			</varFolder>
+		</dataTypes>
+		<queries/>
+		<erViews>
+			<erView>
+				<attribs>
+					<attrib name="fieldsStyle">p</attrib>
+					<attrib name="nameSize">15</attrib>
+					<attrib name="nameStyle">bi</attrib>
+					<attrib name="name">all</attrib>
+					<attrib name="details">af</attrib>
+					<attrib name="fieldsSize">10</attrib>
+					<attrib name="fieldsFamily">Default</attrib>
+					<attrib name="nameFamily">Default</attrib>
+				</attribs>
+				<modsConfig/>
+				<legend>
+					<attribs>
+						<attrib name="name">-UnNamed-</attrib>
+						<attrib name="fontStyle">p</attrib>
+						<attrib name="fontFamily">Default</attrib>
+						<attrib name="fontSize">10</attrib>
+						<attrib name="location">-</attrib>
+					</attribs>
+					<color>
+						<attribs>
+							<attrib name="name">messages</attrib>
+							<attrib name="id">121</attrib>
+						</attribs>
+						<values>
+							<name red="0" green="0" blue="0"/>
+							<nameBg red="180" green="230" blue="255"/>
+							<text red="0" green="0" blue="0"/>
+							<textBg red="230" green="230" blue="180"/>
+							<bg red="255" green="255" blue="200"/>
+							<border red="0" green="0" blue="0"/>
+						</values>
+					</color>
+				</legend>
+				<erEntity>
+					<attribs>
+						<attrib name="name">messages</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">167</attrib>
+						<attrib name="details">af</attrib>
+						<attrib name="locX">227</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="58"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">message_notes</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">48</attrib>
+						<attrib name="details">af</attrib>
+						<attrib name="locX">393</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="52"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">users</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">185</attrib>
+						<attrib name="details">af</attrib>
+						<attrib name="locX">15</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="109"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">contact_information</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">394</attrib>
+						<attrib name="details">af</attrib>
+						<attrib name="locX">40</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="40"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">information_keys</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">421</attrib>
+						<attrib name="details">af</attrib>
+						<attrib name="locX">237</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="46"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">meta_contact</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">387</attrib>
+						<attrib name="details">-</attrib>
+						<attrib name="locX">403</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="67"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">user_statistics</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">28</attrib>
+						<attrib name="details">-</attrib>
+						<attrib name="locX">214</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="104"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">user_display_name</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">31</attrib>
+						<attrib name="details">-</attrib>
+						<attrib name="locX">27</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="99"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">meta_container</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">249</attrib>
+						<attrib name="details">-</attrib>
+						<attrib name="locX">383</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="71"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">saved_items</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">503</attrib>
+						<attrib name="details">-</attrib>
+						<attrib name="locX">413</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="78"/>
+					</tables>
+				</erEntity>
+				<erEntity>
+					<attribs>
+						<attrib name="name">saved_fields</attrib>
+						<attrib name="colorId">121</attrib>
+						<attrib name="locY">543</attrib>
+						<attrib name="details">-</attrib>
+						<attrib name="locX">255</attrib>
+					</attribs>
+					<modsConfig/>
+					<tables>
+						<table id="74"/>
+					</tables>
+				</erEntity>
+			</erView>
+		</erViews>
+		<objects>
+			<folder>
+				<attribs>
+					<attrib name="name">Messages</attrib>
+				</attribs>
+				<modsConfig/>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">messages</attrib>
+						<attrib name="id">58</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Saves all messages with sender, recipient, date and time.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">true</attrib>
+								<attrib name="339">nextval('im.messages_message_id_seq'::text)</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">message_id</attrib>
+							<attrib name="id">59</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">48</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">now()</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">true</attrib>
+								<attrib name="117">true</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">message_date</attrib>
+							<attrib name="id">60</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">57</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">message</attrib>
+							<attrib name="id">61</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">62</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">true</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">true</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">110</attrib>
+							<attrib name="name">sender_id</attrib>
+							<attrib name="id">63</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">109</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">true</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">true</attrib>
+								<attrib name="118">true</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">110</attrib>
+							<attrib name="name">recipient_id</attrib>
+							<attrib name="id">64</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">109</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">true</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">idxfti</attrib>
+							<attrib name="id">65</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">66</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">message_notes</attrib>
+						<attrib name="id">52</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Contains notes on a specific message.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">59</attrib>
+							<attrib name="name">message_id</attrib>
+							<attrib name="id">53</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">58</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">title</attrib>
+							<attrib name="id">54</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">notes</attrib>
+							<attrib name="id">55</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">now()</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">date_added</attrib>
+							<attrib name="id">56</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">57</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<view>
+					<attribs>
+						<attrib name="name">message_v</attrib>
+						<attrib name="sqlCode"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Lists all messages with display names and usernames.</t>
+						</p>
+					</docs>
+				</view>
+				<view>
+					<attribs>
+						<attrib name="name">simple_message_v</attrib>
+						<attrib name="sqlCode"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Shows usernames and messages but no display names.</t>
+						</p>
+					</docs>
+				</view>
+				<sequence>
+					<attribs>
+						<attrib name="name">messages_message_id_seq</attrib>
+						<attrib name="increment"/>
+						<attrib name="cache"/>
+						<attrib name="cycle">false</attrib>
+						<attrib name="start"/>
+						<attrib name="minValue"/>
+						<attrib name="maxValue"/>
+						<attrib name="order">false</attrib>
+					</attribs>
+					<modsConfig/>
+				</sequence>
+			</folder>
+			<folder>
+				<attribs>
+					<attrib name="name">Users</attrib>
+				</attribs>
+				<modsConfig/>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">users</attrib>
+						<attrib name="id">109</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Stores all users and whether they are a login user.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">true</attrib>
+								<attrib name="339">nextval('im.users_user_id_seq'::text)</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="340">false</attrib>
+								<attrib name="115">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">user_id</attrib>
+							<attrib name="id">110</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">48</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="340">false</attrib>
+								<attrib name="115">true</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">username</attrib>
+							<attrib name="id">111</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">112</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">'AIM'::character varying</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="340">false</attrib>
+								<attrib name="115">true</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">service</attrib>
+							<attrib name="id">113</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">89</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">false</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="340">false</attrib>
+								<attrib name="115">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">login</attrib>
+							<attrib name="id">114</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">51</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">user_display_name</attrib>
+						<attrib name="id">99</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Shows a point in time view of a display name.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">true</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">110</attrib>
+							<attrib name="name">user_id</attrib>
+							<attrib name="id">100</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">109</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">display_name</attrib>
+							<attrib name="id">101</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">102</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">now()</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">true</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">effdate</attrib>
+							<attrib name="id">103</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">57</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">user_statistics</attrib>
+						<attrib name="id">104</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Keeps a count of message totals and last message received for quickness.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">true</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">110</attrib>
+							<attrib name="name">sender_id</attrib>
+							<attrib name="id">105</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">109</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">true</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">110</attrib>
+							<attrib name="name">recipient_id</attrib>
+							<attrib name="id">106</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">109</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">1</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">num_messages</attrib>
+							<attrib name="id">107</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">48</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">now()</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">last_message</attrib>
+							<attrib name="id">108</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">57</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<sequence>
+					<attribs>
+						<attrib name="name">users_user_id_seq</attrib>
+						<attrib name="increment"/>
+						<attrib name="cache"/>
+						<attrib name="cycle">false</attrib>
+						<attrib name="start"/>
+						<attrib name="minValue"/>
+						<attrib name="maxValue"/>
+						<attrib name="order">false</attrib>
+					</attribs>
+					<modsConfig/>
+				</sequence>
+			</folder>
+			<folder>
+				<attribs>
+					<attrib name="name">Meta Contacts</attrib>
+				</attribs>
+				<modsConfig/>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">meta_container</attrib>
+						<attrib name="id">71</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Creates a meta contact.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">true</attrib>
+								<attrib name="339">nextval('im.meta_container_meta_id_seq'::text)</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">meta_id</attrib>
+							<attrib name="id">72</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">48</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">name</attrib>
+							<attrib name="id">73</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">meta_contact</attrib>
+						<attrib name="id">67</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Links a meta contact to a user.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">72</attrib>
+							<attrib name="name">meta_id</attrib>
+							<attrib name="id">68</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">71</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">110</attrib>
+							<attrib name="name">user_id</attrib>
+							<attrib name="id">69</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">109</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">false</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">preferred</attrib>
+							<attrib name="id">70</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">51</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<sequence>
+					<attribs>
+						<attrib name="name">meta_container_meta_id_seq</attrib>
+						<attrib name="increment"/>
+						<attrib name="cache"/>
+						<attrib name="cycle">false</attrib>
+						<attrib name="start"/>
+						<attrib name="minValue"/>
+						<attrib name="maxValue"/>
+						<attrib name="order">false</attrib>
+					</attribs>
+					<modsConfig/>
+				</sequence>
+			</folder>
+			<folder>
+				<attribs>
+					<attrib name="name">Saved Info</attrib>
+				</attribs>
+				<modsConfig/>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">information_keys</attrib>
+						<attrib name="id">46</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Contains fields that may be stored as info. (URL, Email, etc)</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">true</attrib>
+								<attrib name="339">nextval('im.information_keys_key_id_seq'::text)</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">key_id</attrib>
+							<attrib name="id">47</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">48</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">key_name</attrib>
+							<attrib name="id">49</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">false</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">delete</attrib>
+							<attrib name="id">50</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">51</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">contact_information</attrib>
+						<attrib name="id">40</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Contains information about a specific user or meta user.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">72</attrib>
+							<attrib name="name">meta_id</attrib>
+							<attrib name="id">41</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">71</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">110</attrib>
+							<attrib name="name">user_id</attrib>
+							<attrib name="id">42</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">109</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">47</attrib>
+							<attrib name="name">key_id</attrib>
+							<attrib name="id">43</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">46</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">value</attrib>
+							<attrib name="id">44</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">saved_items</attrib>
+						<attrib name="id">78</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Saves items.</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">true</attrib>
+								<attrib name="339">nextval('im.saved_items_item_id_seq'::text)</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">item_id</attrib>
+							<attrib name="id">79</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">48</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">title</attrib>
+							<attrib name="id">80</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">notes</attrib>
+							<attrib name="id">81</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">item_type</attrib>
+							<attrib name="id">82</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339">now()</attrib>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">date_added</attrib>
+							<attrib name="id">83</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">57</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<table>
+					<vars>
+						<list>
+							<header>
+								<elem>name</elem>
+								<elem>type</elem>
+								<elem>value</elem>
+								<elem>descr</elem>
+							</header>
+						</list>
+					</vars>
+					<triggers/>
+					<rules/>
+					<attribs>
+						<attrib name="comment"/>
+						<attrib name="name">saved_fields</attrib>
+						<attrib name="id">74</attrib>
+						<attrib name="tempPK"/>
+						<attrib name="tempFK"/>
+						<attrib name="tempOther"/>
+						<attrib name="sqlCommands"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Saves all fields passed to it as a key-value pair. Links to saved_items</t>
+						</p>
+					</docs>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">true</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">79</attrib>
+							<attrib name="name">item_id</attrib>
+							<attrib name="id">75</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">78</attrib>
+							<attrib name="type">0</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">field_name</attrib>
+							<attrib name="id">76</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+					<field>
+						<fieldAttribs>
+							<attribs>
+								<attrib name="120">false</attrib>
+								<attrib name="17">false</attrib>
+								<attrib name="16">false</attrib>
+								<attrib name="15">false</attrib>
+								<attrib name="339"/>
+								<attrib name="338">false</attrib>
+								<attrib name="119">false</attrib>
+								<attrib name="118">false</attrib>
+								<attrib name="117">false</attrib>
+								<attrib name="116">false</attrib>
+								<attrib name="115">false</attrib>
+								<attrib name="340">false</attrib>
+							</attribs>
+						</fieldAttribs>
+						<attribs>
+							<attrib name="comment"/>
+							<attrib name="refField">0</attrib>
+							<attrib name="name">value</attrib>
+							<attrib name="id">77</attrib>
+							<attrib name="onDelete">n</attrib>
+							<attrib name="onUpdate">n</attrib>
+							<attrib name="refTable">0</attrib>
+							<attrib name="type">45</attrib>
+						</attribs>
+						<modsConfig/>
+					</field>
+				</table>
+				<view>
+					<attribs>
+						<attrib name="name">user_contact_info</attrib>
+						<attrib name="sqlCode"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Shows information for a user.</t>
+						</p>
+					</docs>
+				</view>
+				<view>
+					<attribs>
+						<attrib name="name">meta_contact_info</attrib>
+						<attrib name="sqlCode"/>
+					</attribs>
+					<modsConfig/>
+					<docs>
+						<p>
+							<t>Shows information for a meta contact.</t>
+						</p>
+					</docs>
+				</view>
+				<sequence>
+					<attribs>
+						<attrib name="name">information_keys_key_id_seq</attrib>
+						<attrib name="increment"/>
+						<attrib name="cache"/>
+						<attrib name="cycle">false</attrib>
+						<attrib name="start"/>
+						<attrib name="minValue"/>
+						<attrib name="maxValue"/>
+						<attrib name="order">false</attrib>
+					</attribs>
+					<modsConfig/>
+				</sequence>
+				<sequence>
+					<attribs>
+						<attrib name="name">saved_items_item_id_seq</attrib>
+						<attrib name="increment"/>
+						<attrib name="cache"/>
+						<attrib name="cycle">false</attrib>
+						<attrib name="start"/>
+						<attrib name="minValue"/>
+						<attrib name="maxValue"/>
+						<attrib name="order">false</attrib>
+					</attribs>
+					<modsConfig/>
+				</sequence>
+				<sequence>
+					<attribs>
+						<attrib name="name">db_version_seq</attrib>
+						<attrib name="increment"/>
+						<attrib name="cache"/>
+						<attrib name="cycle">false</attrib>
+						<attrib name="start"/>
+						<attrib name="minValue"/>
+						<attrib name="maxValue"/>
+						<attrib name="order">false</attrib>
+					</attribs>
+					<modsConfig/>
+				</sequence>
+			</folder>
+		</objects>
+		<docs>
+			<p>
+				<t>Tables and views for the SQL Logger</t>
+			</p>
+		</docs>
+	</database>
+</project>

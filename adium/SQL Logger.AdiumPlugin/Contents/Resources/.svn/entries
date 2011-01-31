@@ -1,0 +1,44 @@
+8
+
+dir
+35
+http://cavernum.net/svn/projects/sqllogger/adium/SQL%20Logger.AdiumPlugin/Contents/Resources
+http://cavernum.net/svn
+
+
+
+2008-04-24T01:11:38.891250Z
+18
+jmelloy
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7ad008d6-2489-4e5a-9c15-08a86d6636b8
+
+SQLLogging.plist
+file
+
+
+
+
+2008-04-12T15:33:07.000000Z
+006748130019522b4c7a15678783daf0
+2008-04-08T19:06:49.674763Z
+1
+
+has-props
+
+SQL_Logger_Prefs.nib
+dir
+

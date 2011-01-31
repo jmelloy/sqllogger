@@ -1,0 +1,95 @@
+January 31, 2005
+ - Restyled documentation
+
+December 16, 2004
+ - Refactorization
+ - Documenation improvements
+ - Dramatic stats improvements
+ - Schema changes with regard to saving a chat, search, or query
+ - Added Google Suggest to form elements
+ - Added a calendar for the chats page.
+
+November 21, 2004
+ - Dramatically refactored to use Axamol SQL Library
+ - Log import improvements, especially for 10.2 users
+ - Replace Adium ducks with images by mattahan
+ - Distribute as a war instead of multiple JSPs
+
+October 24, 2004
+ - Added a chats page, for showing all chats by a particular user.
+ - Statistics streamlining, updates, cosmetic improvements
+ - Documentation updates
+
+August 15, 2004
+ - Cosmetic improvements
+ - Viewer now auto generates a range based on a single message
+ - Add query engine, ability to save queries, and examples.
+ - Add service icons where appropriate
+ - Improve message_v
+
+July 1, 2004
+ - Added ability to use with Fire
+ - Streamlined the docs.
+ - Streamlined the installation notes.
+ - Removed Adium-specific stuff.
+ - Switched schema name from adium to im.
+
+June 10, 2004
+ - Added a simple viewer window.
+ - Added a recently used URL window.
+ - Added a date range to the search page.
+ - Added a calendar to index.jsp and search.jsp for picking the date.
+
+May 9, 2004
+ - Changed layout of all pages to a much nicer one.
+ - Updated CSS
+ - Added meta contacts
+ - Made address book information about users and meta contacts extensible
+ - Added random message to the stats, removed extraneous stats
+
+April 22, 2004
+ - Added the ability to save searches, chats, and notes.
+ - Switched the username fields to accept wildcard matches
+ - Parser improvements, message view improvements
+ - Cosmetic improvements
+
+December 22, 2003
+ - Added preferences to the plugin for saving to remote servers
+ - Improved statistics and detailed statistics
+ - Cosmetic improvements
+
+November 22, 2003
+ - Added tsearch2 capability.  search.jsp will automatically choose between
+nothing, tsearch1, or tsearch2.
+
+November 9, 2003
+ - Added a simple view for easy copy'n'pasting.
+ - Documentation updates
+ - Cosmetic improvements
+
+September 18, 2003
+ - Improved performance of the statistics and detailed statistics
+ - Cosmetic improvements
+ - Fixed several bugs in message_v
+ - Altered look of index.jsp to better handle long display names.
+ - Documentation improvements
+
+August 21, 2003
+ - Now saves display names and aliases.
+
+August 5, 2003
+ - Parsing and log import improvements, now goes over all users and services
+ - Cosmetic and performance improvements
+
+July 17, 2003
+ - Changed schema to more normalized version
+ - Cosmetic improvements
+ - Big documentation improvements
+
+July 2, 2003
+ - Documentation updates and improvements
+ - Parser updates and improvements
+ - Added statistics
+
+May 4, 2003
+ - Initial Adium plugin release

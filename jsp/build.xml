@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- $Id$ -->
+
+<project name="SQL Logger WAR" default="package">
+
+  <target name="package">
+    <war destfile="sqllogger.war" webxml="web.xml">
+      <classes dir="classes" />
+      <lib dir="libs" />
+      <fileset dir="src" />
+      <zipfileset dir="queries" prefix="queries" />
+    </war>
+  </target>
+
+  <target name="test" depends="compile, package">
+    <copy file="sqllogger.war" todir="/Library/Resin/webapps/" />
+  </target>
+
+  <target name="compile" depends="utils">
+    <javac srcdir="classes" destdir="classes">
+      <classpath>
+        <fileset dir="libs">
+          <include name="**/*.jar"/>
+        </fileset>
+        <fileset
+          dir     = "/Library/Resin/lib/">
+          <include
+            name  = "**/*.jar" />
+        </fileset>
+      </classpath>
+    </javac>
+  </target>
+
+  <target name="utils">
+    <ant dir="../../utils/" inheritall="false" />
+    <copy file="../../utils/dist/lib/utils.jar"
+      todir="libs" />
+  </target>
+
+  <target name="axamol">
+    <ant dir="../../axamol" inheritall="false" />
+    <copy file="../../axamol/dist/axamol-sql-library.jar"
+      todir="libs" />
+  </target>
+</project>

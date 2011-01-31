@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.2//EN" "http://java.sun.com/j2ee/dtds/web-app_2_2.dtd">
+<web-app>
+  <system-property javax.xml.parsers.SAXParserFactory="org.apache.crimson.jaxp.SAXParserFactoryImpl"/>
+  <listener>
+    <listener-class>org.slamb.axamol.library.ServletLibraryLoader</listener-class>
+  </listener>
+  <context-param>
+    <param-name>libraries</param-name>
+    <param-value>standard stats update</param-value>
+  </context-param>
+  <context-param>
+    <param-name>libraryPathPrefix</param-name>
+    <param-value>queries/</param-value>
+  </context-param>
+  <context-param>
+    <param-name>dataSource</param-name>
+    <param-value>java:comp/env/jdbc/postgresql</param-value>
+  </context-param>
+  <context-param>
+    <param-name>bindToRequest</param-name>
+    <param-value>true</param-value>
+  </context-param>
+  <listener>
+    <listener-class>com.caucho.jsp.JspPrecompileListener</listener-class>
+    <init>
+      <extension>jsp</extension>
+    </init>
+  </listener>
+  <servlet>
+    <servlet-name>Calendar</servlet-name>
+    <servlet-class>org.visualdistortion.sqllogger.Calendar</servlet-class>
+  </servlet>
+  <servlet-mapping url-pattern="SaveFormItems" servlet-class="org.visualdistortion.sqllogger.SaveFormItems"/>
+  <servlet-mapping url-pattern="MetaContact" servlet-class="org.visualdistortion.sqllogger.MetaContact"/>
+  <servlet-mapping url-pattern="User" servlet-class="org.visualdistortion.sqllogger.User"/>
+  <servlet>
+    <servlet-name>TimingServlet</servlet-name>
+    <servlet-class>org.slamb.axamol.library.TimingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TimingServlet</servlet-name>
+    <url-pattern>TimingServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Calendar</servlet-name>
+    <url-pattern>Calendar</url-pattern>
+  </servlet-mapping>
+</web-app>

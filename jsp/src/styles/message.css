@@ -1,0 +1,89 @@
+.message_container {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 0px;
+    padding-top: 5px;
+    margin-left: 8px;
+    margin-bottom: 5px;
+}
+
+.msg_container_next {
+    margin-top: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-bottom: 0px;
+    margin-left: 8px;
+    margin-bottom: 5px;
+}
+
+.sender {
+    text-align: left;
+    overflow: hidden;
+    font-size: 11px;
+    font-family: Helvetica;
+    font-weight: bold;
+}
+
+.time_initial {
+    color: #000;
+    float: right;
+    text-align: right;
+    padding-left: 6px;
+    font-size: 10px;
+    font-family: Helvetica;
+}
+
+.message {
+    width: auto;
+    text-align: left;
+    margin-left: 8px;
+}
+
+img {
+    vertical-align: middle;
+    border: none;
+}
+
+a.info {
+    position:relative; /*this is the key*/
+    z-index:24;
+    background-color:#ccc;
+    color:#000;
+    text-decoration:none;
+}
+
+a.info:hover {
+    z-index:25;
+    background-color:#ff0;
+}
+
+a.info span {
+    display: none;
+}
+
+a.info:hover span { /*the span will display just on :hover state*/
+    display:block;
+    position:absolute;
+    top:2em;
+    left:-15em;
+    width:15em;
+    border:1px solid #0cf;
+    background-color:#cff;
+    color: #000;
+    text-align: center;
+}
+
+.even {
+    background: #dddddd;
+}
+
+.odd {
+    background: #ffffff;
+}
+
+.search_group {
+    background-color: #36a;
+    color: #fff;
+    padding: 2px;
+    margin-bottom: 3px;
+}

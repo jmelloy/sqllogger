@@ -1,0 +1,70 @@
+8
+
+dir
+35
+http://cavernum.net/svn/projects/sqllogger/adium/Metacontact%20Importer
+http://cavernum.net/svn
+
+
+
+2008-04-24T01:10:07.639828Z
+17
+jmelloy
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7ad008d6-2489-4e5a-9c15-08a86d6636b8
+
+Metacontact Importer.m
+file
+
+
+
+
+2008-04-12T15:33:05.000000Z
+dd7426904cf25cfa56e8f025db216da3
+2008-04-08T19:06:49.674763Z
+1
+
+has-props
+
+Metacontact Importer.1
+file
+
+
+
+
+2008-04-12T15:33:05.000000Z
+ccc1859f77d3547020452ede89191398
+2008-04-08T19:06:49.674763Z
+1
+
+has-props
+
+Metacontact Importer.xcode
+dir
+
+Metacontact Importer_Prefix.pch
+file
+
+
+
+
+2008-04-12T15:33:05.000000Z
+6456eb44bd7e3d2ee8bbc46b313e6a40
+2008-04-08T19:06:49.674763Z
+1
+
+has-props
+

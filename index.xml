@@ -1,0 +1,73 @@
+    <h3>SQL Logger</h3>
+    <p>SQL Logging implements logging from instant messenger clients into a PostgreSQL database.  It consists of a
+      plugin, a web-interface for the logs written in JSP, and HTML
+      documentation.</p>
+    <p>SQL Logging  offers several advantages over normal methods:</p>
+    <ul>
+      <li>Extremely fast boolean searching</li>
+      <li>Exceptionally detailed statistics</li>
+      <li>Very easy to view logs between certain time periods</li>
+      <li>Easy to view simultaneous conversations</li>
+      <li>Meta-contacts</li>
+      <li>Extensible contact information stored for each contact</li>
+    </ul><br />
+
+    <table>
+      <tr>
+        <td><img
+            src="http://www.visualdistortion.org/sqllogger/screenshots/thumbs/index_notes.png"
+            alt="Notes" width="200" height="174"/>
+        </td>
+        <td>
+          <ul>
+            <li>Easily display multiple simultaneous conversations</li>
+            <li>View with screennames, display names, and meta-contacts</li>
+            <li>Make notes on individual messages</li>
+            <li>Color-coding makes it easy to determine who said what</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img
+            src="http://www.visualdistortion.org/sqllogger/screenshots/thumbs/search.png"
+            alt="Search" width="200" height="174"/>
+        </td>
+        <td>
+          <ul>
+            <li>Search with boolean searches</li>
+            <li>Sort by name, date, or rank</li>
+            <li>Quickly jump to conversation, with words highlighted</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <img
+            src="http://www.visualdistortion.org/sqllogger/screenshots/thumbs/stats.png"
+            alt="Stats" width="200" height="174"/>
+        </td>
+        <td>
+          <ul>
+            <li>View statistics related to individual users or meta-contacts</li>
+            <li>View detailed statistics for a particular user over a
+              month</li>
+            <li>Determine how frequently you speak with someone</li>
+            <li>See when you speak with someone</li>
+            <li>Show popular conversation starters and random quotes.</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+    <p>Installation details and screenshots are in the sidebar to the left.</p>
+    <p>A package containing installation details and the JSP files can be
+      downloaded at <a
+        href="http://www.visualdistortion.org/sqllogger/sqllogger.tar.gz">
+        http://www.visualdistortion.org/sqllogger/sqllogger.tar.gz</a></p>
+    <h3>Acknowledgements</h3>
+    <ul>
+      <li><a href="http://www.slamb.org/projects/axamol/sql-library/">Axamol
+          SQL Library</a> by <a href="http://www.slamb.org/">Scott Lamb</a></li>
+      <li>Icons by <a href="http://mattahan.deviantart.com">mattahan</a></li>
+    </ul>

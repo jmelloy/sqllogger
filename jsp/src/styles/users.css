@@ -1,0 +1,35 @@
+.personal_info {
+    float: right;
+    border-left: 1px solid #000;
+    text-align:right;
+    width: 225px;
+}
+
+.remove {
+    float: right;
+    padding-right: 5px;
+}
+
+.edit {
+    float: right;
+    padding-right: 5px;
+}
+
+.meta p {
+    padding-top: 5px;
+}
+
+.meta {
+    border-top: 1px solid #000;
+    padding-bottom: 15px;
+    padding-left: 10px;
+}
+
+.personal_info td.left {
+    text-align: right;
+}
+
+.header {
+    background: #cce;
+    font-weight: bold;
+}
